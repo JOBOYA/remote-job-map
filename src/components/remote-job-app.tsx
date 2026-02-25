@@ -211,7 +211,7 @@ export function RemoteJobApp() {
           />
 
           {/* Stats overlay */}
-          <div className="absolute bottom-6 left-6 flex flex-col gap-2 pointer-events-none">
+          <div className="absolute bottom-20 md:bottom-6 left-6 flex flex-col gap-2 pointer-events-none">
             <div className="flex gap-3">
               <div className="px-4 py-3 rounded-xl bg-zinc-900/90 backdrop-blur border border-white/10">
                 <div className="text-2xl font-bold text-white">{filteredJobs.length}</div>
