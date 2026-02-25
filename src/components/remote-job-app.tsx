@@ -84,31 +84,33 @@ export function RemoteJobApp() {
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5">
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 py-2 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-[1800px] mx-auto flex items-center justify-between">
-          <div className="flex flex-col gap-0.5">
-            <div className="h-10 w-48 overflow-hidden flex items-center justify-center">
+          {/* Logo */}
+          <div className="flex flex-col gap-0">
+            <div className="h-8 w-36 overflow-hidden flex items-center justify-center">
               <img src="/VERT_logo.svg" alt="RemoteMap logo" style={{ height: "350%", width: "auto", maxWidth: "none" }} />
             </div>
-            <p className="text-[10px] text-white/40 leading-none text-left w-48 pl-20">Remote jobs on a map</p>
+            <p className="text-[9px] text-white/40 leading-none pl-14">Remote jobs on a map</p>
           </div>
 
-          <div className="flex items-center gap-4">
+          {/* Actions */}
+          <div className="flex items-center gap-2">
             <button
               onClick={loadJobs}
               disabled={loading}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 transition-all disabled:opacity-50"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 transition-all disabled:opacity-50 text-sm"
             >
-              <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
-              Refresh
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
+              <span className="hidden sm:inline">Refresh</span>
             </button>
             <a
               href="https://github.com/JOBOYA/remote-job-map"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 transition-all"
+              className="p-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 transition-all"
             >
-              <Github className="w-5 h-5" />
+              <Github className="w-4 h-4" />
             </a>
           </div>
         </div>
