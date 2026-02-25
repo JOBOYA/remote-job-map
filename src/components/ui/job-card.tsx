@@ -74,7 +74,15 @@ export function JobCard({ job }: JobCardProps) {
                     ? "text-violet-400 bg-violet-500/10 border-violet-500/30"
                     : job.source === "Arbeitnow"
                     ? "text-amber-400 bg-amber-500/10 border-amber-500/30"
-                    : "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
+                    : job.source === "Jobicy"
+                    ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
+                    : job.source === "RemoteOK"
+                    ? "text-sky-400 bg-sky-500/10 border-sky-500/30"
+                    : job.source === "WorkingNomads"
+                    ? "text-orange-400 bg-orange-500/10 border-orange-500/30"
+                    : job.source === "TheMuse"
+                    ? "text-pink-400 bg-pink-500/10 border-pink-500/30"
+                    : "text-white/40 bg-white/5 border-white/15"
                 }`}
               >
                 {job.source}

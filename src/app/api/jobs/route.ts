@@ -22,6 +22,28 @@ const APIS = [
     urls: ["https://jobicy.com/api/v2/remote-jobs?count=50"],
     parse: (data: Record<string, unknown>) => (data.jobs as unknown[]) ?? [],
   },
+  {
+    name: "RemoteOK",
+    urls: ["https://remoteok.com/api"],
+    // RemoteOK returns an array; first item is a legal notice object, skip it
+    parse: (data: Record<string, unknown>) => {
+      const arr = Array.isArray(data) ? (data as unknown[]) : [];
+      return arr.filter((item) => (item as Record<string, unknown>).id !== undefined && (item as Record<string, unknown>).position !== undefined);
+    },
+  },
+  {
+    name: "WorkingNomads",
+    urls: ["https://www.workingnomads.com/api/exposed_jobs/"],
+    parse: (data: Record<string, unknown>) => Array.isArray(data) ? (data as unknown[]) : [],
+  },
+  {
+    name: "TheMuse",
+    urls: [
+      "https://www.themuse.com/api/public/jobs?page=0&per_page=100",
+      "https://www.themuse.com/api/public/jobs?page=1&per_page=100",
+    ],
+    parse: (data: Record<string, unknown>) => (data.results as unknown[]) ?? [],
+  },
 ];
 
 async function fetchUrl(url: string): Promise<unknown> {

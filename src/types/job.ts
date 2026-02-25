@@ -167,11 +167,8 @@ export const LOCATION_COORDINATES: Record<string, { lat: number; lng: number; co
   "americas": { lat: 19.0, lng: -96.0, country: "Americas" },
   "north america": { lat: 45.0, lng: -100.0, country: "North America" },
   
-  // Remote/Worldwide — mid-Atlantic so dots don't land on Africa
-  "worldwide": { lat: 30.0, lng: -40.0, country: "Worldwide" },
-  "anywhere": { lat: 30.0, lng: -40.0, country: "Worldwide" },
-  "remote": { lat: 30.0, lng: -40.0, country: "Worldwide" },
-  "global": { lat: 30.0, lng: -40.0, country: "Worldwide" },
+  // "worldwide", "remote", "anywhere", "global" intentionally omitted
+  // so they fall through to coordinates: undefined and stay off the map
 };
 
 export const CATEGORIES = [

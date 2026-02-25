@@ -20,6 +20,9 @@ const SOURCE_DOT: Record<string, string> = {
   Remotive: "bg-violet-400",
   Arbeitnow: "bg-amber-400",
   Jobicy: "bg-emerald-400",
+  RemoteOK: "bg-sky-400",
+  WorkingNomads: "bg-orange-400",
+  TheMuse: "bg-pink-400",
 };
 
 export function RemoteJobApp() {
@@ -100,7 +103,7 @@ export function RemoteJobApp() {
               Refresh
             </button>
             <a
-              href="https://github.com"
+              href="https://github.com/JOBOYA/remote-job-map"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 transition-all"
