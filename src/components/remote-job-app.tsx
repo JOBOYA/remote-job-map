@@ -7,10 +7,10 @@ import { Filters } from "@/components/ui/filters";
 import { JobWithCoordinates } from "@/types/job";
 import { fetchAllJobs, countBySource } from "@/lib/api";
 import {
-  Globe2,
   Briefcase,
   Loader2,
   MapPin,
+  Map as MapIcon,
   X,
   RefreshCw,
   Github,
@@ -27,6 +27,7 @@ export function RemoteJobApp() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedJobs, setSelectedJobs] = useState<JobWithCoordinates[]>([]);
+  const [mobileTab, setMobileTab] = useState<"map" | "jobs">("map");
 
   // Filters
   const [searchQuery, setSearchQuery] = useState("");
@@ -82,16 +83,11 @@ export function RemoteJobApp() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-[1800px] mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
-              <Globe2 className="w-5 h-5 text-white" />
+          <div className="flex flex-col gap-0.5">
+            <div className="h-10 w-48 overflow-hidden flex items-center justify-center">
+              <img src="/VERT_logo.svg" alt="RemoteMap logo" style={{ height: "350%", width: "auto", maxWidth: "none" }} />
             </div>
-            <div>
-              <h1 className="text-xl font-bold tracking-tight">
-                Remote<span className="text-violet-400">Map</span>
-              </h1>
-              <p className="text-xs text-white/40">Remote jobs on a map</p>
-            </div>
+            <p className="text-[10px] text-white/40 leading-none text-left w-48 pl-20">Remote jobs on a map</p>
           </div>
 
           <div className="flex items-center gap-4">
@@ -115,10 +111,28 @@ export function RemoteJobApp() {
         </div>
       </header>
 
+      {/* Mobile tab bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex border-t border-white/10 bg-zinc-950/95 backdrop-blur">
+        <button
+          onClick={() => setMobileTab("map")}
+          className={`flex-1 flex flex-col items-center gap-1 py-3 text-xs transition-colors ${mobileTab === "map" ? "text-violet-400" : "text-white/40"}`}
+        >
+          <MapIcon className="w-5 h-5" />
+          Map
+        </button>
+        <button
+          onClick={() => setMobileTab("jobs")}
+          className={`flex-1 flex flex-col items-center gap-1 py-3 text-xs transition-colors ${mobileTab === "jobs" ? "text-violet-400" : "text-white/40"}`}
+        >
+          <Briefcase className="w-5 h-5" />
+          Jobs {filteredJobs.length > 0 && <span className="text-[10px]">({filteredJobs.length})</span>}
+        </button>
+      </div>
+
       {/* Main content */}
-      <main className="pt-20 h-screen flex">
+      <main className="pt-20 h-screen flex pb-16 md:pb-0">
         {/* Sidebar */}
-        <aside className="w-[480px] h-full flex flex-col border-r border-white/5 bg-zinc-950">
+        <aside className={`w-full md:w-[480px] h-full flex flex-col border-r border-white/5 bg-zinc-950 ${mobileTab === "jobs" ? "flex" : "hidden md:flex"}`}>
           {/* Filters */}
           <div className="p-6 border-b border-white/5">
             <Filters
@@ -184,7 +198,7 @@ export function RemoteJobApp() {
         </aside>
 
         {/* Map */}
-        <div className="flex-1 relative">
+        <div className={`flex-1 relative ${mobileTab === "map" ? "flex flex-col" : "hidden md:flex md:flex-col"}`}>
           <Map
             jobs={filteredJobs}
             onSelectJobs={setSelectedJobs}
